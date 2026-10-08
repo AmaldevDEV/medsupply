@@ -1,0 +1,4 @@
+emergency_request_id,requesting_hospital,medicine_id,quantity_required,required_by,procedure_type,urgency_level,current_stock,supplier_available,supplier_delivery_time,status,created_at
+EMERG_REQ_001,HOSP_H,MED008,500,2026-10-09 10:00,Emergency Aortic Repair / Reversal,STAT Critical,0,0,48 hours (Contract Lead Time),OPEN,2026-10-08 15:30
+EMERG_REQ_002,HOSP_D,MED004,800,2026-10-08 15:45,Mass Casualty Multi-Trauma Resuscitation,Immediate Code Red,15,0,24 hours,OPEN,2026-10-08 15:30
+EMERG_REQ_003,HOSP_G,MED018,80,2026-10-09 15:30,Severe Refractory Immunologic Crisis,Urgent Priority,5,1,7 days,OPEN,2026-10-08 15:30

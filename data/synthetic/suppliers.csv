@@ -1,0 +1,42 @@
+supplier_id,supplier_name,medicine_id,lead_time_days,minimum_order_quantity,maximum_supply,reliability_score
+SUP001,Apex Regional Pharma Distribution,MED001,5,100,25000,0.96
+SUP001,Apex Regional Pharma Distribution,MED002,5,100,25000,0.96
+SUP001,Apex Regional Pharma Distribution,MED004,5,100,25000,0.96
+SUP001,Apex Regional Pharma Distribution,MED005,5,100,25000,0.96
+SUP001,Apex Regional Pharma Distribution,MED009,5,100,25000,0.96
+SUP001,Apex Regional Pharma Distribution,MED010,5,100,25000,0.96
+SUP001,Apex Regional Pharma Distribution,MED015,5,100,25000,0.96
+SUP002,Beacon Biologics & Cold Chain Logistics,MED003,7,100,25000,0.94
+SUP002,Beacon Biologics & Cold Chain Logistics,MED007,7,100,25000,0.94
+SUP002,Beacon Biologics & Cold Chain Logistics,MED008,7,100,25000,0.94
+SUP002,Beacon Biologics & Cold Chain Logistics,MED018,7,50,25000,0.94
+SUP003,Crestline Surgical & Specialty Supplies,MED006,4,100,25000,0.98
+SUP003,Crestline Surgical & Specialty Supplies,MED019,4,100,25000,0.98
+SUP003,Crestline Surgical & Specialty Supplies,MED020,4,100,25000,0.98
+SUP004,Delta National Wholesale,MED001,6,100,25000,0.91
+SUP004,Delta National Wholesale,MED005,6,100,25000,0.91
+SUP004,Delta National Wholesale,MED011,6,100,25000,0.91
+SUP004,Delta National Wholesale,MED012,6,100,25000,0.91
+SUP004,Delta National Wholesale,MED014,6,100,25000,0.91
+SUP004,Delta National Wholesale,MED016,6,100,25000,0.91
+SUP004,Delta National Wholesale,MED017,6,100,25000,0.91
+SUP005,Eastern Rural & District Medical Supply,MED001,13,100,25000,0.82
+SUP005,Eastern Rural & District Medical Supply,MED002,13,100,25000,0.82
+SUP005,Eastern Rural & District Medical Supply,MED004,13,100,25000,0.82
+SUP005,Eastern Rural & District Medical Supply,MED005,13,100,25000,0.82
+SUP005,Eastern Rural & District Medical Supply,MED009,13,100,25000,0.82
+SUP005,Eastern Rural & District Medical Supply,MED011,13,100,25000,0.82
+SUP006,Global Anesthesia & Critical Care Depot,MED002,5,100,25000,0.95
+SUP006,Global Anesthesia & Critical Care Depot,MED009,5,100,25000,0.95
+SUP006,Global Anesthesia & Critical Care Depot,MED010,5,100,25000,0.95
+SUP006,Global Anesthesia & Critical Care Depot,MED013,5,100,25000,0.95
+SUP006,Global Anesthesia & Critical Care Depot,MED015,5,100,25000,0.95
+SUP007,Highland Emergency Infusion Direct,MED004,3,100,25000,0.97
+SUP007,Highland Emergency Infusion Direct,MED005,3,100,25000,0.97
+SUP007,Highland Emergency Infusion Direct,MED008,3,100,25000,0.97
+SUP007,Highland Emergency Infusion Direct,MED012,3,100,25000,0.97
+SUP008,Metro Standard Health Distributor,MED001,8,100,25000,0.89
+SUP008,Metro Standard Health Distributor,MED003,8,100,25000,0.89
+SUP008,Metro Standard Health Distributor,MED007,8,100,25000,0.89
+SUP008,Metro Standard Health Distributor,MED011,8,100,25000,0.89
+SUP008,Metro Standard Health Distributor,MED016,8,100,25000,0.89

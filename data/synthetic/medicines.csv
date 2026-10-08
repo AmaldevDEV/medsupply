@@ -1,0 +1,21 @@
+medicine_id,medicine_name,category,criticality,unit,shelf_life_days,has_alternative,alternative_medicine_id,unit_cost_inr,storage_condition,requires_cold_chain,unit_cost_usd
+MED001,Antibiotic-A,Broad-Spectrum Antibiotic,4,vials (1g),270,1,MED011,850.0,Ambient (15-25°C),False,10.24
+MED002,Analgesic-A,Critical Analgesic & Sedation,4,ampoules (50mcg/mL),365,1,MED013,280.0,Controlled Ambient,False,3.37
+MED003,Insulin-A,Metabolic & Endocrine,5,vials (100U/mL),180,0,,420.0,Cold Chain (2-8°C),True,5.06
+MED004,Emergency-Medicine-A,Emergency Resuscitation & Vasopressor,5,ampoules (1mg/mL),365,0,,350.0,Ambient (Protected from light),False,4.22
+MED005,IV-Fluid-A,High-Volume Hydration Fluid,3,bags (1000mL),730,1,MED012,55.0,Ambient (15-30°C),False,0.66
+MED006,Surgical-Supply-A,Surgical Hemostatic Matrix,4,kits,365,0,,3200.0,Ambient (15-25°C),False,38.55
+MED007,Antiviral-A,Targeted Antiviral Infusion,4,vials (100mg),180,1,MED014,4800.0,Cold Chain (2-8°C),True,57.83
+MED008,Emergency-Injection-A,Urgent Surgery Reversal & Antidote,5,ampoules (10mg/mL),240,0,,2400.0,Cold Chain (2-8°C),True,28.92
+MED009,Sedative-A,ICU Sedation & Anesthesia,4,vials (20mL),365,1,MED013,380.0,Ambient (20-25°C),False,4.58
+MED010,Anticoagulant-A,Critical Cardiovascular Anticoagulant,4,vials (5000U/mL),540,0,,290.0,Ambient,False,3.49
+MED011,Antibiotic-B,Second-Line Antibiotic,3,vials (1g),300,1,MED001,620.0,Ambient,False,7.47
+MED012,IV-Fluid-B,Balanced Electrolyte Fluid,3,bags (1000mL),730,1,MED005,65.0,Ambient,False,0.78
+MED013,Sedative-B,Short-Acting Sedative Anxiolytic,3,ampoules (5mg/mL),365,1,MED009,190.0,Ambient,False,2.29
+MED014,Antiviral-B,Oral Antiviral Capsule,3,packs (30 caps),365,1,MED007,1450.0,Ambient,False,17.47
+MED015,Cardiovascular-A,Antiarrhythmic Injection,4,ampoules (150mg/3mL),365,0,,340.0,Ambient,False,4.1
+MED016,Respiratory-A,Emergency Bronchodilator Nebulizer,4,boxes (30 nebules),450,0,,280.0,Ambient,False,3.37
+MED017,Dialysis-Supply-A,Renal Replacement Solution,4,canisters (5L),540,0,,1200.0,Ambient,False,14.46
+MED018,Critical-Biologic-A,Specialized Monoclonal Immunoglobulin,5,vials (500mg),90,0,,18500.0,Cold Chain (2-8°C),True,222.89
+MED019,Surgical-Suture-A,Vascular Synthetic Hemostatic Suture,3,boxes (36 sutures),730,0,,1800.0,Ambient,False,21.69
+MED020,Burn-Care-A,Advanced Antimicrobial Wound Dressing,3,packs (10 dressings),540,0,,750.0,Ambient,False,9.04

@@ -1,0 +1,11 @@
+hospital_id,hospital_name,type,latitude,longitude,beds,daily_patient_capacity,average_patient_load,emergency_patient_load,ICU_capacity,current_occupancy,safety_stock_policy_days,corridor,description
+HOSP_A,Hospital A,Level 1 Trauma & Tertiary Referral Center,28.5672,77.21,750,650,580,120,90,0.88,5,Ring Road Central Corridor,High acute demand epicenter. Facing upcoming shortage of critical emergency resuscitation medicines.
+HOSP_B,Hospital B,Metropolitan General Hospital,28.5284,77.2185,520,450,360,70,55,0.72,5,Elevated Expressway Corridor,"Stable regional center with high excess stock, safe transferable surplus, and rapid expressway access."
+HOSP_C,Hospital C,Community Acute Care Hospital,28.6219,77.0878,310,270,210,40,24,0.68,4,West District Radial Arterial,Community facility with short-expiry inventory batch at imminent risk of wastage.
+HOSP_D,Hospital D,Urban District Hospital,28.6517,77.1906,240,210,195,85,18,0.93,4,Central Commercial Dense Grid,Outbreak epicenter hospital experiencing sudden demand surge and high emergency influx.
+HOSP_E,Hospital E,Regional Specialty & Emergency Care,28.5494,77.2736,380,330,300,95,38,0.89,5,South-East Industrial Bypass,Specialty center with sustained high emergency patient load and regional outbreak exposure.
+HOSP_F,Hospital F,Peripheral District Clinic & Hospital,28.4595,77.0266,120,100,80,25,8,0.7,6,National Highway Corridor,Peripheral facility burdened by unusually long primary supplier lead times (12-14 days).
+HOSP_G,Hospital G,Suburban Surgical Center,28.57,77.32,200,180,140,30,16,0.75,4,Trans-River Tollway Arterial,"Facing primary critical antibiotic shortage, but holds ample viable clinical alternative stock."
+HOSP_H,Hospital H,Children & Adult Surgical Specialty Hospital,28.6304,77.2177,340,300,250,50,32,0.82,5,Central Civic Hub,Scheduled urgent emergency vascular surgery requiring specialized injection unavailable locally.
+HOSP_I,Hospital I,Eastside Community Care,28.628,77.2789,160,140,110,20,10,0.69,4,Bridge Choke Point Corridor (High Traffic Congestion),"Geographically nearest facility to Hospital H (6.2 km), but suffers severe bottleneck bridge traffic and lacks surplus."
+HOSP_J,Hospital J,North County Health Hub,28.7041,77.1025,420,370,290,45,40,0.74,5,Outer Ring Road Signal-Free Flow,Has sufficient safe surplus for emergency requirements; connected via Outer Ring Road flow.

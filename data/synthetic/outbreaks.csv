@@ -1,0 +1,2 @@
+outbreak_id,start_date,end_date,affected_hospitals,affected_medicines,severity,description
+OUTBREAK_2026_01,2026-06-10,2026-07-08,"HOSP_D,HOSP_E,HOSP_F","MED005,MED007,MED016",2.4,Regional respiratory viral surge with high pulmonary morbidity and acute care admissions.

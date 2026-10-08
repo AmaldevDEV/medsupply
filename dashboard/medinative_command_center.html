@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html class="dark" lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=JetBrains+Mono:wght@100..900&display=swap" rel="stylesheet"/>
+  <style>
+    @layer base {
+      html, body { margin: 0; padding: 0; }
+      body { overscroll-behavior: none; }
+    }
+    ::-webkit-scrollbar { display: none; }
+  </style>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "secondary-fixed": "#c3e8ff",
+            "tertiary-fixed": "#6bff8f",
+            "surface-bright": "#353942",
+            "on-error-container": "#ffdad6",
+            "secondary-container": "#00bdfd",
+            "on-primary": "#003061",
+            "on-secondary-container": "#004964",
+            "background": "#0f131c",
+            "error-container": "#93000a",
+            "surface": "#0f131c",
+            "primary": "#a7c8ff",
+            "inverse-surface": "#dfe2ee",
+            "on-secondary-fixed-variant": "#004c69",
+            "surface-container-highest": "#31353e",
+            "primary-container": "#3291ff",
+            "surface-container-low": "#181c24",
+            "tertiary-fixed-dim": "#4ae176",
+            "on-tertiary-fixed": "#002109",
+            "on-primary-container": "#002a55",
+            "inverse-primary": "#005eb2",
+            "outline": "#8a919f",
+            "surface-container-lowest": "#0a0e16",
+            "on-tertiary-fixed-variant": "#005321",
+            "surface-container-high": "#262a33",
+            "on-surface-variant": "#c0c6d6",
+            "surface-dim": "#0f131c",
+            "on-error": "#690005",
+            "on-tertiary": "#003915",
+            "primary-fixed-dim": "#a7c8ff",
+            "secondary-fixed-dim": "#7ad0ff",
+            "tertiary": "#4ae176",
+            "on-background": "#dfe2ee",
+            "inverse-on-surface": "#2c3039",
+            "on-primary-fixed": "#001b3c",
+            "surface-tint": "#a7c8ff",
+            "on-surface": "#dfe2ee",
+            "tertiary-container": "#00a74b",
+            "primary-fixed": "#d5e3ff",
+            "on-secondary-fixed": "#001e2c",
+            "on-secondary": "#003549",
+            "surface-container": "#1c2028",
+            "error": "#ffb4ab",
+            "outline-variant": "#404754",
+            "secondary": "#8bd5ff",
+            "on-primary-fixed-variant": "#004788",
+            "surface-variant": "#31353e",
+            "on-tertiary-container": "#003111"
+          },
+          fontFamily: {
+            "headline-sm": ["Inter"],
+            "body-lg": ["Inter"],
+            "headline-xl": ["Inter"],
+            "label-telemetry-lg": ["JetBrains Mono"],
+            "body-md": ["Inter"],
+            "headline-md": ["Inter"],
+            "caption": ["Inter"],
+            "label-telemetry-sm": ["JetBrains Mono"],
+            "headline-lg": ["Inter"],
+            "headline-xl-mobile": ["Inter"],
+            "label-telemetry-md": ["JetBrains Mono"],
+            "body-sm": ["Inter"]
+          }
+        }
+      }
+    };
+  </script>
+</head>
+<body class="bg-background font-body-md text-on-surface min-h-screen">
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface-container-lowest/95 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.5)]">
+    <div class="h-14 w-full px-4 md:px-6 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4 flex-shrink-0">
+        <div class="flex items-center gap-2">
+          <span class="material-symbols-outlined text-secondary text-[20px]">bolt</span>
+          <span class="font-headline-sm text-[15px] font-semibold text-on-surface tracking-tight uppercase">Medinative</span>
+          <span class="text-outline-variant font-caption text-[11px]">/</span>
+          <span class="font-caption text-[11px] text-on-surface-variant uppercase tracking-wider hidden lg:inline-block">Medical Supply Intelligence</span>
+        </div>
+        <div class="h-4 w-[1px] bg-surface-container-highest hidden sm:block"></div>
+        <div class="hidden xl:flex items-center gap-2 px-2.5 py-0.5 rounded bg-surface-container-low">
+          <span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+          <span class="font-label-telemetry-sm text-[11px] font-mono text-tertiary uppercase">Intelligence Engine Online</span>
+        </div>
+      </div>
+      <nav class="flex items-center gap-1 overflow-x-auto py-1 scrollbar-none" id="medinative-nav">
+        <a class="px-2.5 py-1 transition-colors whitespace-nowrap bg-primary-container text-on-primary-container font-semibold rounded text-xs" href="javascript:void(0);" onclick="parent.window.location.hash='command-center';">Command Center</a>
+        <a class="px-2.5 py-1 text-xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors whitespace-nowrap rounded" href="javascript:void(0);" onclick="parent.window.location.hash='inventory-forecast';">Inventory &amp; Forecast</a>
+        <a class="px-2.5 py-1 text-xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors whitespace-nowrap rounded" href="javascript:void(0);" onclick="parent.window.location.hash='shortage-risk';">Shortage &amp; Lead-Time Risk</a>
+        <a class="px-2.5 py-1 text-xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors whitespace-nowrap rounded" href="javascript:void(0);" onclick="parent.window.location.hash='expiry-risk';">Expiry / Waste Risk</a>
+        <a class="px-2.5 py-1 text-xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors whitespace-nowrap rounded" href="javascript:void(0);" onclick="parent.window.location.hash='redistribution';">Normal Redistribution</a>
+        <a class="px-2.5 py-1 text-xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors whitespace-nowrap rounded" href="javascript:void(0);" onclick="parent.window.location.hash='emergency-sourcing';">Emergency Sourcing</a>
+        <a class="px-2.5 py-1 text-xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors whitespace-nowrap rounded" href="javascript:void(0);" onclick="parent.window.location.hash='outbreak-simulator';">What-If &amp; Outbreak Simulator</a>
+        <a class="px-2.5 py-1 text-xs text-on-surface-variant hover:bg-surface-container hover:text-on-surface transition-colors whitespace-nowrap rounded" href="javascript:void(0);" onclick="parent.window.location.hash='ai-assistant';">AI Supply Assistant</a>
+      </nav>
+      <div class="flex items-center gap-3 flex-shrink-0">
+        <button class="hidden md:flex items-center gap-1.5 px-2.5 py-1 rounded bg-surface-container hover:bg-surface-container-high text-secondary hover:text-on-surface transition-colors text-xs font-mono" type="button">
+          <span class="material-symbols-outlined text-[16px]">flash_on</span>
+          <span>QUICK ACTION</span>
+        </button>
+        <button aria-label="Notifications" class="relative p-1 rounded hover:bg-surface-container text-on-surface-variant hover:text-on-surface transition-colors" type="button">
+          <span class="material-symbols-outlined text-[20px]">notifications</span>
+          <span class="absolute top-1 right-1 w-2 h-2 rounded-full bg-error ring-2 ring-surface-container-lowest"></span>
+        </button>
+        <div class="h-4 w-[1px] bg-surface-container-highest"></div>
+        <div class="flex items-center gap-2">
+          <div class="text-right hidden sm:block">
+            <div class="text-[11px] text-on-surface leading-none font-medium">Triage Admin</div>
+            <div class="text-[11px] font-mono text-on-surface-variant leading-none mt-0.5">CTRL-01</div>
+          </div>
+          <div class="w-8 h-8 rounded-full bg-primary flex items-center justify-center text-on-primary">
+            <span class="material-symbols-outlined text-[18px]">person</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="w-full pt-14 bg-background min-h-screen">
+    <div class="flex flex-col w-full">
+      <!-- SYNCHRONIZED TELEMETRY STATUS RIBBON -->
+      <div class="w-full bg-surface-container-lowest px-4 md:px-6 py-2 flex flex-wrap items-center justify-between gap-3 text-xs">
+        <div class="flex items-center gap-4 flex-wrap">
+          <div class="flex items-center gap-2">
+            <span class="w-2 h-2 rounded-full bg-tertiary animate-pulse shadow-[0_0_8px_rgba(74,225,118,0.6)]"></span>
+            <span class="font-mono text-[11px] text-tertiary uppercase tracking-wider">Telemetry Synced: 10 Hubs Active</span>
+          </div>
+          <span class="text-outline-variant">|</span>
+          <div class="flex items-center gap-1.5 font-mono text-[11px] text-on-surface-variant">
+            <span class="text-outline">REFRESH CYCLE:</span>
+            <span class="text-primary font-semibold">4.8s</span>
+          </div>
+          <span class="text-outline-variant">|</span>
+          <div class="flex items-center gap-1.5 font-mono text-[11px] text-secondary">
+            <span class="text-outline-variant">PIPELINE:</span>
+            <span class="px-1.5 py-0.5 rounded bg-surface-container-high text-on-surface">DETECT</span>
+            <span class="text-outline">→</span>
+            <span class="px-1.5 py-0.5 rounded bg-surface-container-high text-secondary">PREDICT</span>
+            <span class="text-outline">→</span>
+            <span class="px-1.5 py-0.5 rounded bg-surface-container-high text-primary">DECIDE</span>
+            <span class="text-outline">→</span>
+            <span class="px-1.5 py-0.5 rounded bg-primary text-on-primary font-semibold">ACT</span>
+          </div>
+        </div>
+        <div class="flex items-center gap-3 font-mono text-[11px]">
+          <span class="text-outline">NETWORK LOAD: 84.2%</span>
+          <span class="text-error bg-error/10 px-2 py-0.5 rounded font-medium">2 CRITICAL HUBS ON BUFFER LIMIT</span>
+        </div>
+      </div>
+
+      <div class="p-4 md:p-6 flex flex-col gap-6">
+        <!-- TOP KPI TELEMETRY CARDS (4 COMPACT TILES) -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-4">
+          <!-- KPI 1: Critical Shortages -->
+          <div class="bg-surface-container p-4 rounded shadow-md relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-error/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-on-surface-variant uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
+                Critical Shortages
+              </span>
+              <span class="font-mono text-[11px] text-error bg-error/15 px-1.5 py-0.5 rounded font-semibold">STOCKOUT CLIFF</span>
+            </div>
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-3xl font-semibold text-error tracking-tight">20</span>
+              <span class="text-xs text-error/80 uppercase">Stockouts Active</span>
+            </div>
+            <div class="text-xs text-on-surface-variant flex items-center justify-between">
+              <span>4 regional hubs &lt; 24h stockout cliff</span>
+              <span class="font-mono text-error font-medium">+3 vs T-6h</span>
+            </div>
+            <div class="w-full bg-surface-container-highest h-1 rounded mt-3 overflow-hidden">
+              <div class="bg-error h-full rounded" style="width: 78%"></div>
+            </div>
+          </div>
+
+          <!-- KPI 2: Transferable Surplus -->
+          <div class="bg-surface-container p-4 rounded shadow-md relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-secondary/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-on-surface-variant uppercase tracking-wider flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[14px] text-secondary">bolt</span>
+                Transferable Surplus
+              </span>
+              <span class="font-mono text-[11px] text-secondary bg-secondary/15 px-1.5 py-0.5 rounded">ALGO-OPTIMIZED</span>
+            </div>
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-3xl font-semibold text-secondary tracking-tight">41,541</span>
+              <span class="text-xs text-secondary/80 uppercase">Units Verified</span>
+            </div>
+            <div class="text-xs text-on-surface-variant flex items-center justify-between">
+              <span>Ready for algorithm-backed redistribution</span>
+              <span class="font-mono text-secondary font-medium">3 Donor Hubs</span>
+            </div>
+            <div class="w-full bg-surface-container-highest h-1 rounded mt-3 overflow-hidden">
+              <div class="bg-secondary h-full rounded" style="width: 62%"></div>
+            </div>
+          </div>
+
+          <!-- KPI 3: Expiry / Waste Risk -->
+          <div class="bg-surface-container p-4 rounded shadow-md relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-surface-tint/10 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-on-surface-variant uppercase tracking-wider flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-[14px] text-outline">hourglass_bottom</span>
+                Expiry / Waste Risk
+              </span>
+              <span class="font-mono text-[11px] text-outline bg-surface-container-highest px-1.5 py-0.5 rounded">31-DAY DECAY</span>
+            </div>
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-3xl font-semibold text-on-surface tracking-tight">₹16.54M</span>
+              <span class="text-xs text-outline uppercase">Value at Risk</span>
+            </div>
+            <div class="text-xs text-on-surface-variant flex items-center justify-between">
+              <span>8 high-risk lots across 5 clinical categories</span>
+              <span class="font-mono text-error font-medium">-14% salvage ETA</span>
+            </div>
+            <div class="w-full bg-surface-container-highest h-1 rounded mt-3 overflow-hidden">
+              <div class="bg-outline h-full rounded" style="width: 44%"></div>
+            </div>
+          </div>
+
+          <!-- KPI 4: Active Emergency Requests -->
+          <div class="bg-surface-container p-4 rounded shadow-md relative overflow-hidden group hover:bg-surface-container-high transition-colors">
+            <div class="absolute -right-4 -bottom-4 w-24 h-24 bg-error-container/20 rounded-full blur-2xl pointer-events-none"></div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs text-on-surface-variant uppercase tracking-wider flex items-center gap-1.5">
+                <span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                Active Emergency Requests
+              </span>
+              <span class="font-mono text-[11px] text-error bg-error/20 px-1.5 py-0.5 rounded animate-pulse font-semibold">PRIORITY ICU</span>
+            </div>
+            <div class="flex items-baseline gap-2 mb-2">
+              <span class="text-3xl font-semibold text-error tracking-tight">03</span>
+              <span class="text-xs text-error uppercase font-medium">Urgent Active</span>
+            </div>
+            <div class="text-xs text-on-surface-variant flex items-center justify-between">
+              <span>Highest: Hospital H Trauma ICU</span>
+              <span class="font-mono text-error font-semibold">⏱ 48m left</span>
+            </div>
+            <div class="w-full bg-surface-container-highest h-1 rounded mt-3 overflow-hidden">
+              <div class="bg-error h-full rounded" style="width: 90%"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MAIN CENTRAL 2-COLUMN DECISION LAYOUT (58% Left, 42% Right) -->
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
+          <!-- LEFT COLUMN: REGIONAL HOSPITAL NETWORK MAP CARD (7 cols ~58%) -->
+          <div class="lg:col-span-7 flex flex-col bg-surface-container rounded shadow-lg overflow-hidden relative">
+            <!-- Card Header & Filter Ribbon -->
+            <div class="p-4 bg-surface-container-high flex flex-wrap items-center justify-between gap-3">
+              <div class="flex flex-col">
+                <div class="flex items-center gap-2">
+                  <span class="material-symbols-outlined text-secondary text-[20px]">hub</span>
+                  <h2 class="text-base font-semibold text-on-surface tracking-tight">Regional Hospital Facility Network</h2>
+                  <span class="px-1.5 py-0.5 rounded bg-tertiary/15 text-tertiary font-mono text-[11px] flex items-center gap-1 font-semibold">
+                    <span class="w-1.5 h-1.5 rounded-full bg-tertiary animate-pulse"></span>
+                    LIVE
+                  </span>
+                </div>
+                <p class="text-xs text-on-surface-variant mt-0.5">Real-time facility status, dynamic routing vectors, and verified supply redistributions</p>
+              </div>
+              <!-- Filter Controls -->
+              <div class="flex items-center gap-1.5">
+                <div class="flex bg-surface-container-lowest p-0.5 rounded">
+                  <button class="px-2.5 py-1 font-mono text-[11px] rounded bg-surface-container text-on-surface shadow-sm" id="filter-all">All (10)</button>
+                  <button class="px-2.5 py-1 font-mono text-[11px] text-on-surface-variant hover:text-error transition-colors" id="filter-crit">Critical (3)</button>
+                  <button class="px-2.5 py-1 font-mono text-[11px] text-on-surface-variant hover:text-secondary transition-colors" id="filter-routes">Routes (2)</button>
+                </div>
+                <div class="flex bg-surface-container-lowest rounded p-0.5">
+                  <button class="p-1 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container" title="Zoom in">
+                    <span class="material-symbols-outlined text-[16px]">add</span>
+                  </button>
+                  <button class="p-1 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container" title="Zoom out">
+                    <span class="material-symbols-outlined text-[16px]">remove</span>
+                  </button>
+                  <button class="p-1 text-on-surface-variant hover:text-on-surface rounded hover:bg-surface-container" title="Reset View">
+                    <span class="material-symbols-outlined text-[16px]">restart_alt</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Tactical Vector Map Viewport -->
+            <div class="relative w-full h-[470px] bg-surface-container-lowest overflow-hidden select-none">
+              <!-- Tactical Grid Background Pattern -->
+              <svg class="absolute inset-0 w-full h-full opacity-20 pointer-events-none" xmlns="http://www.w3.org/2000/svg">
+                <defs>
+                  <pattern height="40" id="tactical-grid" patternunits="userSpaceOnUse" width="40">
+                    <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#404754" stroke-width="0.75"></path>
+                    <circle cx="0" cy="0" fill="#8bd5ff" r="1.5"></circle>
+                  </pattern>
+                </defs>
+                <rect fill="url(#tactical-grid)" height="100%" width="100%"></rect>
+                <!-- Coordinate Crosshairs -->
+                <line stroke="#404754" stroke-dasharray="4 4" stroke-width="0.5" x1="25%" x2="25%" y1="0" y2="100%"></line>
+                <line stroke="#404754" stroke-dasharray="4 4" stroke-width="0.5" x1="68%" x2="68%" y1="0" y2="100%"></line>
+                <line stroke="#404754" stroke-dasharray="4 4" stroke-width="0.5" x1="0" x2="100%" y1="45%" y2="45%"></line>
+              </svg>
+
+              <!-- SVG Routing Lines Overlay -->
+              <svg class="absolute inset-0 w-full h-full pointer-events-none" preserveaspectratio="none" viewbox="0 0 700 470">
+                <defs>
+                  <filter height="140%" id="cyan-glow" width="140%" x="-20%" y="-20%">
+                    <fegaussianblur result="blur" stddeviation="3"></fegaussianblur>
+                    <fecomposite in="SourceGraphic" in2="blur" operator="over"></fecomposite>
+                  </filter>
+                </defs>
+                <!-- ROUTE 1: Normal Redistribution Route Hosp B -> Hosp A -->
+                <path class="opacity-90" d="M 230,200 Q 180,140 140,95" fill="none" id="route-b-a" stroke="#3291ff" stroke-dasharray="6,4" stroke-width="2.5">
+                  <animate attributename="stroke-dashoffset" dur="2s" from="40" repeatcount="indefinite" to="0"></animate>
+                </path>
+                <!-- Animated Transit Particle on B->A -->
+                <circle fill="#8bd5ff" r="4">
+                  <animatemotion dur="2.4s" path="M 230,200 Q 180,140 140,95" repeatcount="indefinite"></animatemotion>
+                </circle>
+
+                <!-- ROUTE 2: Emergency Sourcing Corridor Hosp B -> Hosp H -->
+                <path class="opacity-95" d="M 230,200 C 320,170 410,240 480,290" fill="none" filter="url(#cyan-glow)" id="route-b-h" stroke="#00bdfd" stroke-width="3.5">
+                  <animate attributename="stroke-opacity" dur="1.5s" repeatcount="indefinite" values="0.7;1;0.7"></animate>
+                </path>
+                <path d="M 230,200 C 320,170 410,240 480,290" fill="none" stroke="#ffb4ab" stroke-dasharray="4,3" stroke-width="1.5">
+                  <animate attributename="stroke-dashoffset" dur="1.2s" from="0" repeatcount="indefinite" to="-30"></animate>
+                </path>
+                <!-- High Speed Particle on Emergency Run -->
+                <circle fill="#ffffff" filter="url(#cyan-glow)" r="5">
+                  <animatemotion dur="1.4s" path="M 230,200 C 320,170 410,240 480,290" repeatcount="indefinite"></animatemotion>
+                </circle>
+
+                <!-- Route 3 secondary network link Hosp D -> Hosp C -->
+                <line opacity="0.4" stroke="#8a919f" stroke-dasharray="2,4" stroke-width="1" x1="340" x2="460" y1="85" y2="110"></line>
+              </svg>
+
+              <!-- ROUTE BADGES OVERLAY -->
+              <div class="absolute left-[135px] top-[140px] pointer-events-auto bg-surface-container-high/95 backdrop-blur px-2 py-0.5 rounded shadow-md border-l-2 border-primary-container text-xs flex items-center gap-1.5">
+                <span class="material-symbols-outlined text-primary text-[12px]">local_shipping</span>
+                <span class="font-mono text-[11px] text-primary font-semibold">B→A: 2,500u</span>
+                <span class="text-outline">| 2h 15m</span>
+                <span class="text-tertiary font-mono text-[11px]">FEASIBLE</span>
+              </div>
+              <div class="absolute left-[310px] top-[195px] pointer-events-auto bg-error-container/80 backdrop-blur px-2 py-0.5 rounded shadow-lg border-l-2 border-error text-xs flex items-center gap-1.5 animate-pulse">
+                <span class="material-symbols-outlined text-error text-[12px]">emergency_share</span>
+                <span class="font-mono text-[11px] text-on-error-container font-semibold">EMERGENCY: Hosp B→H</span>
+                <span class="text-on-error-container text-xs">500u | ETA 3h</span>
+                <span class="px-1 rounded bg-error text-on-error font-mono text-[10px]">CRITICAL</span>
+              </div>
+
+              <!-- 10 INTERACTIVE FACILITY NODES -->
+              <!-- Hosp A: Critical (140, 95) -->
+              <div class="absolute left-[120px] top-[75px] group cursor-pointer z-20">
+                <div class="relative flex items-center justify-center">
+                  <span class="absolute w-8 h-8 rounded-full bg-error/30 animate-ping"></span>
+                  <span class="w-5 h-5 rounded-full bg-error shadow-[0_0_12px_rgba(239,51,64,0.9)] flex items-center justify-center text-on-error font-mono text-[11px] font-semibold">A</span>
+                </div>
+                <div class="mt-1 bg-surface-container-highest/90 backdrop-blur px-2 py-0.5 rounded shadow whitespace-nowrap text-center">
+                  <div class="text-xs font-semibold text-error">Hosp A • 1.1d</div>
+                  <div class="font-mono text-[10px] text-outline">Load 89%</div>
+                </div>
+              </div>
+
+              <!-- Hosp B: Safe Donor Hub (230, 200) -->
+              <div class="absolute left-[215px] top-[185px] group cursor-pointer z-20">
+                <div class="relative flex items-center justify-center">
+                  <span class="w-6 h-6 rounded-full bg-tertiary-container shadow-[0_0_10px_rgba(74,225,118,0.7)] flex items-center justify-center text-on-tertiary font-mono text-[11px] font-semibold">B</span>
+                </div>
+                <div class="mt-1 bg-surface-container-highest/90 backdrop-blur px-2 py-0.5 rounded shadow whitespace-nowrap text-center">
+                  <div class="text-xs font-semibold text-tertiary">Hosp B [HUB]</div>
+                  <div class="font-mono text-[10px] text-tertiary-fixed">+9,200u surplus</div>
+                </div>
+              </div>
+
+              <!-- Hosp C: Moderate (460, 110) -->
+              <div class="absolute left-[445px] top-[95px] group cursor-pointer z-10">
+                <div class="w-4 h-4 rounded-full bg-surface-tint shadow flex items-center justify-center text-surface-container-lowest font-mono text-[10px]">C</div>
+                <div class="mt-1 bg-surface-container-high/90 px-1 py-0.5 rounded whitespace-nowrap text-center">
+                  <div class="text-xs text-on-surface">Hosp C</div>
+                  <div class="font-mono text-[9px] text-outline">+1.2k safe</div>
+                </div>
+              </div>
+
+              <!-- Hosp D: Safe Donor (340, 85) -->
+              <div class="absolute left-[328px] top-[70px] group cursor-pointer z-10">
+                <div class="w-4 h-4 rounded-full bg-tertiary shadow flex items-center justify-center text-on-tertiary font-mono text-[10px]">D</div>
+                <div class="mt-1 bg-surface-container-high/90 px-1 py-0.5 rounded whitespace-nowrap text-center">
+                  <div class="text-xs text-tertiary">Hosp D • +3.1k</div>
+                </div>
+              </div>
+
+              <!-- Hosp E: Moderate (190, 310) -->
+              <div class="absolute left-[175px] top-[295px] group cursor-pointer z-10">
+                <div class="w-4 h-4 rounded-full bg-primary flex items-center justify-center text-on-primary font-mono text-[10px]">E</div>
+                <div class="mt-1 bg-surface-container-high/80 px-1 py-0.5 rounded whitespace-nowrap text-center">
+                  <span class="text-xs text-on-surface">Hosp E • 2.1d</span>
+                </div>
+              </div>
+
+              <!-- Hosp F: Moderate (90, 240) -->
+              <div class="absolute left-[78px] top-[225px] group cursor-pointer z-10">
+                <div class="w-3.5 h-3.5 rounded-full bg-outline-variant flex items-center justify-center text-on-surface font-mono text-[9px]">F</div>
+                <div class="mt-1 bg-surface-container-high/80 px-1 py-0.5 rounded whitespace-nowrap text-center">
+                  <span class="text-xs text-on-surface-variant">Hosp F</span>
+                </div>
+              </div>
+
+              <!-- Hosp G: Critical (570, 180) -->
+              <div class="absolute left-[555px] top-[165px] group cursor-pointer z-20">
+                <div class="relative flex items-center justify-center">
+                  <span class="w-4.5 h-4.5 rounded-full bg-error shadow-[0_0_8px_rgba(239,51,64,0.8)] flex items-center justify-center text-on-error font-mono text-[11px]">G</span>
+                </div>
+                <div class="mt-1 bg-surface-container-highest/90 px-2 py-0.5 rounded shadow whitespace-nowrap text-center">
+                  <div class="text-xs font-semibold text-error">Hosp G • 1.4d</div>
+                </div>
+              </div>
+
+              <!-- Hosp H: Critical ICU (480, 290) -->
+              <div class="absolute left-[460px] top-[270px] group cursor-pointer z-30">
+                <div class="relative flex items-center justify-center">
+                  <span class="absolute w-9 h-9 rounded-full bg-error/40 animate-ping"></span>
+                  <span class="w-6 h-6 rounded-full bg-error shadow-[0_0_14px_rgba(239,51,64,1)] flex items-center justify-center text-on-error font-mono text-[11px] font-semibold">H</span>
+                </div>
+                <div class="mt-1 bg-surface-container-highest px-2 py-0.5 rounded shadow-lg whitespace-nowrap text-center">
+                  <div class="text-xs font-semibold text-error">Hosp H • 0.2d</div>
+                  <div class="font-mono text-[10px] text-error font-semibold">TRAUMA ICU</div>
+                </div>
+              </div>
+
+              <!-- Hosp I: Safe (610, 310) -->
+              <div class="absolute left-[595px] top-[295px] group cursor-pointer z-10">
+                <div class="w-4 h-4 rounded-full bg-tertiary flex items-center justify-center text-on-tertiary font-mono text-[10px]">I</div>
+                <div class="mt-1 bg-surface-container-high/80 px-1 py-0.5 rounded whitespace-nowrap text-center">
+                  <span class="text-xs text-tertiary">Hosp I • Safe</span>
+                </div>
+              </div>
+
+              <!-- Hosp J: Moderate (340, 360) -->
+              <div class="absolute left-[325px] top-[345px] group cursor-pointer z-10">
+                <div class="w-3.5 h-3.5 rounded-full bg-outline-variant flex items-center justify-center text-on-surface font-mono text-[9px]">J</div>
+                <div class="mt-1 bg-surface-container-high/80 px-1 py-0.5 rounded whitespace-nowrap text-center">
+                  <span class="text-xs text-on-surface-variant">Hosp J • 3.8d</span>
+                </div>
+              </div>
+
+              <!-- DOCKED FACILITY DRILLDOWN POPOVER -->
+              <div class="absolute left-4 bottom-4 w-72 bg-surface-container-highest/95 backdrop-blur-md p-3 rounded shadow-2xl z-40 border border-surface-container-high">
+                <div class="flex items-center justify-between pb-1 mb-1 border-b border-surface-container-high">
+                  <div class="flex items-center gap-1.5">
+                    <span class="w-2 h-2 rounded-full bg-error animate-pulse"></span>
+                    <span class="text-xs font-semibold text-on-surface">Hospital A (Regional Center)</span>
+                  </div>
+                  <span class="font-mono text-[10px] text-error bg-error/15 px-1 rounded">89% LOAD</span>
+                </div>
+                <div class="space-y-1 mb-3">
+                  <div class="flex justify-between text-xs">
+                    <span class="text-on-surface-variant">Top Risk Item:</span>
+                    <span class="text-error font-semibold">Inj. Norepinephrine</span>
+                  </div>
+                  <div class="flex justify-between text-xs">
+                    <span class="text-on-surface-variant">Stockout Horizon:</span>
+                    <span class="text-error font-mono text-[11px]">1.1 Days (Vendor: 7d)</span>
+                  </div>
+                  <div class="flex justify-between text-xs">
+                    <span class="text-on-surface-variant">Recommended Action:</span>
+                    <span class="text-secondary font-semibold">Redistribute from Hosp B</span>
+                  </div>
+                </div>
+                <button class="w-full py-1.5 px-3 bg-primary-container hover:bg-secondary-container text-on-primary-container rounded font-mono text-[11px] flex items-center justify-center gap-1.5 transition-colors shadow">
+                  <span class="material-symbols-outlined text-[15px]">flash_on</span>
+                  <span>Execute Transfer (2,500u • ETA 2h 15m)</span>
+                </button>
+              </div>
+
+              <!-- MAP LEGEND -->
+              <div class="absolute right-4 bottom-4 bg-surface-container-lowest/90 backdrop-blur px-3 py-1.5 rounded shadow text-xs flex flex-col gap-1 pointer-events-none border border-surface-container-high">
+                <div class="flex items-center gap-3 text-[10px]">
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-tertiary"></span>Safe</span>
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-surface-tint"></span>Moderate</span>
+                  <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-error"></span>Critical</span>
+                </div>
+                <div class="flex items-center gap-3 text-[10px]">
+                  <span class="flex items-center gap-1 text-secondary"><span class="w-2.5 h-0.5 bg-secondary inline-block"></span>AI Redist</span>
+                  <span class="flex items-center gap-1 text-error"><span class="w-2.5 h-0.5 bg-error inline-block"></span>Emergency</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- RIGHT COLUMN: SYNCHRONIZED CRITICAL ACTION PANELS (5 cols ~42%) -->
+          <div class="lg:col-span-5 flex flex-col gap-4">
+            <!-- CARD 1: TOP CRITICAL SHORTAGE WATCHLIST -->
+            <div class="bg-surface-container rounded shadow-md overflow-hidden flex flex-col">
+              <div class="p-3 bg-surface-container-high flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-error text-[18px]">warning</span>
+                  <h3 class="text-sm font-semibold text-on-surface">Top Critical Shortage Watchlist</h3>
+                </div>
+                <span class="px-1.5 py-0.5 rounded bg-error/20 text-error font-mono text-[11px] font-semibold">3 URGENT CLIFFS</span>
+              </div>
+              <div class="overflow-x-auto">
+                <table class="w-full text-left text-xs">
+                  <thead class="bg-surface-container-low text-outline uppercase text-[10px] tracking-wider font-mono">
+                    <tr>
+                      <th class="py-1.5 px-3 font-medium">Facility / Item</th>
+                      <th class="py-1.5 px-1.5 font-medium text-right">Stock</th>
+                      <th class="py-1.5 px-1.5 font-medium text-right">Depletion</th>
+                      <th class="py-1.5 px-1.5 font-medium">Lead Gap</th>
+                      <th class="py-1.5 px-3 font-medium text-right">Command</th>
+                    </tr>
+                  </thead>
+                  <tbody class="divide-y divide-surface-container-highest">
+                    <tr class="hover:bg-surface-container-high/80 transition-colors cursor-pointer group bg-surface-container-low/40">
+                      <td class="py-2 px-3">
+                        <div class="font-semibold text-on-surface flex items-center gap-1">
+                          <span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                          Hosp A (Regional)
+                        </div>
+                        <div class="text-[11px] text-on-surface-variant truncate max-w-[130px]">Inj. Norepinephrine</div>
+                      </td>
+                      <td class="py-2 px-1.5 text-right font-mono text-error">180 U</td>
+                      <td class="py-2 px-1.5 text-right font-mono text-error">1.1d</td>
+                      <td class="py-2 px-1.5 text-[11px] text-outline">7d (Diff: -5.9d)</td>
+                      <td class="py-2 px-3 text-right">
+                        <button class="px-2 py-1 rounded bg-primary-container text-on-primary-container hover:bg-secondary-container font-mono text-[11px] transition-colors whitespace-nowrap shadow-sm">
+                          ⚡ Solve
+                        </button>
+                      </td>
+                    </tr>
+                    <tr class="hover:bg-surface-container-high/80 transition-colors cursor-pointer group bg-error/5">
+                      <td class="py-2 px-3">
+                        <div class="font-semibold text-error flex items-center gap-1">
+                          <span class="w-1.5 h-1.5 rounded-full bg-error animate-ping"></span>
+                          Hosp H (ICU Trauma)
+                        </div>
+                        <div class="text-[11px] text-on-surface-variant truncate max-w-[130px]">Vasopressin 20U</div>
+                      </td>
+                      <td class="py-2 px-1.5 text-right font-mono text-error font-semibold">0 U</td>
+                      <td class="py-2 px-1.5 text-right font-mono text-error font-semibold">0.2d</td>
+                      <td class="py-2 px-1.5 text-[11px] text-error font-semibold">BYPASS (9d)</td>
+                      <td class="py-2 px-3 text-right">
+                        <button class="px-2 py-1 rounded bg-error text-on-error hover:bg-error-container font-mono text-[11px] transition-colors whitespace-nowrap shadow-sm">
+                          🚨 Dispatch
+                        </button>
+                      </td>
+                    </tr>
+                    <tr class="hover:bg-surface-container-high/80 transition-colors cursor-pointer group">
+                      <td class="py-2 px-3">
+                        <div class="font-semibold text-on-surface flex items-center gap-1">
+                          <span class="w-1.5 h-1.5 rounded-full bg-error"></span>
+                          Hosp G (District)
+                        </div>
+                        <div class="text-[11px] text-on-surface-variant truncate max-w-[130px]">Meropenem 1g</div>
+                      </td>
+                      <td class="py-2 px-1.5 text-right font-mono text-error">40 U</td>
+                      <td class="py-2 px-1.5 text-right font-mono text-error">1.4d</td>
+                      <td class="py-2 px-1.5 text-[11px] text-outline">5d (Diff: -3.6d)</td>
+                      <td class="py-2 px-3 text-right">
+                        <button class="px-2 py-1 rounded bg-surface-container-highest hover:bg-surface-container-high text-secondary font-mono text-[11px] transition-colors whitespace-nowrap">
+                          ⚡ Solve
+                        </button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- CARD 2: PENDING EMERGENCY REQUESTS -->
+            <div class="bg-surface-container rounded shadow-md overflow-hidden flex flex-col relative">
+              <div class="p-3 bg-surface-container-high flex items-center justify-between">
+                <div class="flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-error text-[18px]">medical_services</span>
+                  <h3 class="text-sm font-semibold text-on-surface">Pending Emergency Requests</h3>
+                </div>
+                <div class="flex items-center gap-1.5 bg-error-container/20 px-2 py-0.5 rounded text-error">
+                  <span class="material-symbols-outlined text-[13px] animate-spin">timelapse</span>
+                  <span class="font-mono text-[11px] font-semibold">⏱ 48m REMAINING</span>
+                </div>
+              </div>
+              <div class="p-4 flex flex-col gap-3">
+                <div class="flex items-center justify-between text-xs bg-surface-container-lowest p-2 rounded">
+                  <div class="flex items-center gap-1.5">
+                    <span class="font-mono text-[11px] text-error font-semibold">EMERG_REQ_001</span>
+                    <span class="text-outline">•</span>
+                    <span class="text-on-surface">ICU Level 1 Protocol</span>
+                  </div>
+                  <span class="text-error font-mono text-[11px]">BREACH IMMINENT</span>
+                </div>
+                <div class="bg-surface-container-low p-3 rounded space-y-1.5">
+                  <div class="flex justify-between items-start">
+                    <div>
+                      <div class="font-semibold text-sm text-on-surface">Hospital H (Trauma &amp; Critical Care)</div>
+                      <div class="text-xs text-on-surface-variant">Requested item: <strong class="text-secondary font-semibold">Vasopressin 500 units</strong></div>
+                    </div>
+                    <div class="text-right">
+                      <div class="font-mono text-[11px] text-error">10:00 AM TODAY</div>
+                      <div class="text-[11px] text-outline">Deadline hard-stop</div>
+                    </div>
+                  </div>
+                  <div class="bg-tertiary-container/10 p-2 rounded flex items-start gap-1.5 text-xs">
+                    <span class="material-symbols-outlined text-tertiary text-[16px] shrink-0">check_circle</span>
+                    <div class="text-on-surface-variant">
+                      <span class="font-semibold text-tertiary">Verified Solution:</span>
+                      Optimal Source is <strong class="text-on-surface">Hospital B</strong> (1,200u reserve verified, Transit: 3h direct priority courier).
+                    </div>
+                  </div>
+                </div>
+                <button class="w-full py-2.5 px-4 bg-secondary-container hover:bg-primary-container text-on-secondary-container font-semibold text-xs rounded shadow-lg flex items-center justify-center gap-2 transition-all transform active:scale-95">
+                  <span class="material-symbols-outlined text-[18px]">bolt</span>
+                  <span>Find Emergency Source &amp; Dispatch Corridor</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- LOWER INTELLIGENCE SECTION: THREE-COLUMN PREDICTIVE GRID -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+          <!-- COLUMN 1: Demand Forecast -->
+          <div class="bg-surface-container p-4 rounded shadow-md flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">trending_up</span>
+                  <h4 class="text-sm font-semibold text-on-surface">Demand Forecast</h4>
+                </div>
+                <span class="font-mono text-[11px] text-secondary bg-surface-container-high px-1.5 py-0.5 rounded">7-DAY HORIZON</span>
+              </div>
+              <p class="text-xs text-on-surface-variant mb-3">Actual clinical consumption vs AI surge predictive envelope</p>
+              <div class="w-full h-32 bg-surface-container-lowest rounded p-1 relative flex items-center justify-center">
+                <svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 300 100">
+                  <line stroke="#262a33" stroke-dasharray="2 2" stroke-width="0.5" x1="0" x2="300" y1="25" y2="25"></line>
+                  <line stroke="#262a33" stroke-dasharray="2 2" stroke-width="0.5" x1="0" x2="300" y1="50" y2="50"></line>
+                  <line stroke="#262a33" stroke-dasharray="2 2" stroke-width="0.5" x1="0" x2="300" y1="75" y2="75"></line>
+                  <path d="M 0,65 Q 50,68 100,60 T 200,62 T 300,58" fill="none" opacity="0.6" stroke="#8a919f" stroke-dasharray="4 3" stroke-width="1.5"></path>
+                  <path d="M 0,65 L 45,63 L 90,52 L 135,42" fill="none" stroke="#4ae176" stroke-width="2.5"></path>
+                  <path d="M 135,42 Q 180,28 220,18 T 300,10" fill="none" stroke="#00bdfd" stroke-width="2.5"></path>
+                  <path d="M 135,42 Q 180,28 220,18 T 300,10 L 300,100 L 135,100 Z" fill="url(#blue-gradient)" opacity="0.15"></path>
+                  <defs>
+                    <lineargradient id="blue-gradient" x1="0" x2="0" y1="0" y2="1">
+                      <stop offset="0%" stop-color="#00bdfd"></stop>
+                      <stop offset="100%" stop-color="#00bdfd" stop-opacity="0"></stop>
+                    </lineargradient>
+                  </defs>
+                  <line opacity="0.8" stroke="#ffb4ab" stroke-dasharray="3 3" stroke-width="1" x1="0" x2="300" y1="20" y2="20"></line>
+                  <text fill="#ffb4ab" font-family="JetBrains Mono" font-size="8" x="5" y="16">SURGE CAP THRESHOLD</text>
+                  <circle cx="135" cy="42" fill="#ffffff" r="3"></circle>
+                </svg>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-2 text-xs text-outline font-mono">
+              <span class="flex items-center gap-1"><span class="w-2 h-0.5 bg-tertiary inline-block"></span>Actual Trend</span>
+              <span class="flex items-center gap-1"><span class="w-2 h-0.5 bg-secondary inline-block"></span>AI Surge Model</span>
+              <span class="text-error font-medium">+38% Peak Surge</span>
+            </div>
+          </div>
+
+          <!-- COLUMN 2: Depletion Horizon -->
+          <div class="bg-surface-container p-4 rounded shadow-md flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-error text-[18px]">trending_down</span>
+                  <h4 class="text-sm font-semibold text-on-surface">Depletion Horizon</h4>
+                </div>
+                <span class="font-mono text-[11px] text-error bg-error/15 px-1.5 py-0.5 rounded">CLIFF DETECTED</span>
+              </div>
+              <p class="text-xs text-on-surface-variant mb-3">Hospital A stock trend approaching zero buffer cliff</p>
+              <div class="w-full h-32 bg-surface-container-lowest rounded p-1 relative flex items-center justify-center">
+                <svg class="w-full h-full" preserveaspectratio="none" viewbox="0 0 300 100">
+                  <line stroke="#ffb4ab" stroke-dasharray="4 2" stroke-width="1" x1="0" x2="300" y1="65" y2="65"></line>
+                  <text fill="#ffb4ab" font-family="JetBrains Mono" font-size="8" x="5" y="61">CRITICAL MIN BUFFER (200u)</text>
+                  <path d="M 0,20 L 70,35 L 140,55 L 200,85 L 240,98 L 300,100" fill="none" stroke="#ffb4ab" stroke-width="2.5"></path>
+                  <path d="M 0,20 L 70,35 L 140,55 L 200,85 L 240,98 L 300,100 L 0,100 Z" fill="#93000a" opacity="0.2"></path>
+                  <line stroke="#ffb4ab" stroke-dasharray="2 2" stroke-width="1.5" x1="200" x2="200" y1="0" y2="100"></line>
+                  <rect fill="#93000a" height="15" rx="2" width="40" x="180" y="5"></rect>
+                  <text fill="#ffdad6" font-family="JetBrains Mono" font-size="8" font-weight="600" x="184" y="16">DAY +1.1</text>
+                </svg>
+              </div>
+            </div>
+            <div class="flex items-center justify-between pt-2 text-xs text-outline font-mono">
+              <span>Current: <strong class="text-error font-medium">180 U</strong></span>
+              <span>Depletion Rate: <strong class="text-on-surface">12.5 U/hr</strong></span>
+              <span class="text-error font-semibold">Cliff at 26h</span>
+            </div>
+          </div>
+
+          <!-- COLUMN 3: Top Recommended AI Actions -->
+          <div class="bg-surface-container p-4 rounded shadow-md flex flex-col justify-between">
+            <div>
+              <div class="flex items-center justify-between mb-3">
+                <div class="flex items-center gap-1.5">
+                  <span class="material-symbols-outlined text-secondary text-[18px]">smart_toy</span>
+                  <h4 class="text-sm font-semibold text-on-surface">Top Recommended AI Actions</h4>
+                </div>
+                <span class="font-mono text-[11px] text-primary font-semibold">3 READY</span>
+              </div>
+              <div class="space-y-2">
+                <div class="p-2 bg-surface-container-high rounded hover:bg-surface-container-highest transition-colors flex items-center justify-between gap-2">
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-1 text-xs">
+                      <span class="text-secondary font-semibold">Hosp B → Hosp A: 2,500u</span>
+                      <span class="px-1 rounded bg-secondary/15 text-secondary text-[9px] font-mono">HIGH IMPACT</span>
+                    </div>
+                    <div class="text-[11px] text-outline truncate">ETA 2h 15m • Defeats 1.1d cliff</div>
+                  </div>
+                  <button class="px-2 py-1 rounded bg-secondary-container text-on-secondary-container hover:bg-primary-container font-mono text-[10px] whitespace-nowrap shadow">
+                    Authorize
+                  </button>
+                </div>
+                <div class="p-2 bg-surface-container-high rounded hover:bg-surface-container-highest transition-colors flex items-center justify-between gap-2">
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-1 text-xs">
+                      <span class="text-on-surface font-semibold">Hosp D → Hosp C: 1,200u</span>
+                      <span class="px-1 rounded bg-tertiary/15 text-tertiary text-[9px] font-mono">PREVENT</span>
+                    </div>
+                    <div class="text-[11px] text-outline truncate">IV Saline pre-weekend balance</div>
+                  </div>
+                  <button class="px-2 py-1 rounded bg-surface-container text-outline hover:text-on-surface font-mono text-[10px] whitespace-nowrap">
+                    Queue
+                  </button>
+                </div>
+                <div class="p-2 bg-surface-container-high rounded hover:bg-surface-container-highest transition-colors flex items-center justify-between gap-2">
+                  <div class="min-w-0">
+                    <div class="flex items-center gap-1 text-xs">
+                      <span class="text-error font-semibold">Hosp B → Hosp H: 500u</span>
+                      <span class="px-1 rounded bg-error/20 text-error text-[9px] font-mono">CRITICAL</span>
+                    </div>
+                    <div class="text-[11px] text-outline truncate">Emergency Vasopressin courier</div>
+                  </div>
+                  <button class="px-2 py-1 rounded bg-error text-on-error hover:bg-error-container font-mono text-[10px] whitespace-nowrap shadow">
+                    Execute
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="pt-2 text-right">
+              <a class="font-mono text-[11px] text-secondary hover:underline flex items-center justify-end gap-1" href="javascript:void(0);">
+                <span>View All Optimization Runs (14)</span>
+                <span class="material-symbols-outlined text-[13px]">arrow_forward</span>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- FLOATING AI SUPPLY ASSISTANT TRIGGER WIDGET -->
+      <div class="fixed bottom-6 right-6 z-50 flex items-center gap-3 group">
+        <div class="opacity-0 group-hover:opacity-100 transition-opacity bg-surface-container-highest/95 backdrop-blur px-3 py-1.5 rounded shadow-xl font-mono text-xs text-on-surface pointer-events-none flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-secondary animate-ping"></span>
+          <span>⚡ Ask Supply AI (Context Loaded: Hosp A &amp; H)</span>
+        </div>
+        <button aria-label="Open AI Supply Assistant" class="w-12 h-12 rounded-full bg-primary-container hover:bg-secondary-container text-on-primary-container shadow-[0_0_20px_rgba(50,145,255,0.6)] flex items-center justify-center transition-transform hover:scale-110 active:scale-95">
+          <span class="material-symbols-outlined text-[24px]">smart_toy</span>
+        </button>
+      </div>
+
+      <!-- Micro script for interactive filter toggling -->
+      <script>
+        const btnAll = document.getElementById('filter-all');
+        const btnCrit = document.getElementById('filter-crit');
+        const btnRoutes = document.getElementById('filter-routes');
+
+        if (btnAll && btnCrit && btnRoutes) {
+          const resetFilters = () => {
+            [btnAll, btnCrit, btnRoutes].forEach(b => {
+              b.className = 'px-2.5 py-1 font-mono text-[11px] text-on-surface-variant hover:text-on-surface transition-colors';
+            });
+          };
+
+          btnAll.addEventListener('click', () => {
+            resetFilters();
+            btnAll.className = 'px-2.5 py-1 font-mono text-[11px] rounded bg-surface-container text-on-surface shadow-sm';
+          });
+
+          btnCrit.addEventListener('click', () => {
+            resetFilters();
+            btnCrit.className = 'px-2.5 py-1 font-mono text-[11px] rounded bg-error/20 text-error shadow-sm';
+          });
+
+          btnRoutes.addEventListener('click', () => {
+            resetFilters();
+            btnRoutes.className = 'px-2.5 py-1 font-mono text-[11px] rounded bg-secondary/20 text-secondary shadow-sm';
+          });
+        }
+      </script>
+    </div>
+  </main>
+
+  <footer class="w-full bg-surface-container-lowest py-3 mt-auto border-t border-surface-container-high">
+    <div class="w-full px-4 md:px-6 flex flex-col md:flex-row items-center justify-between gap-2 text-xs text-on-surface-variant font-mono">
+      <div class="flex items-center gap-3">
+        <span class="text-outline">TELEMETRY NODE: 44.192.11.89</span>
+        <span class="hidden sm:inline">•</span>
+        <span class="text-outline">LATENCY: 14MS</span>
+        <span class="hidden sm:inline">•</span>
+        <span class="text-outline">MEDINATIVE INTELLIGENCE KERNEL v4.18.2</span>
+      </div>
+      <div class="text-outline">© 2025 Medinative Systems. Mission Critical Clinical Logistics.</div>
+    </div>
+  </footer>
+</body>
+</html>
