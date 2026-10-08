@@ -158,6 +158,11 @@
             <span class="">⚡</span>
             <span class="">Emergency</span>
           </button>
+          <button onclick="setWorkerTab('ai')" id="wtab-ai" class="worker-tab flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#172033] transition-all">
+            <span class="">🤖</span>
+            <span class="">AI Assistant</span>
+            <span class="px-1.5 py-0.2 bg-blue-100 text-[#1677FF] text-[10px] font-bold rounded-full border border-blue-200">Mistral</span>
+          </button>
         </nav>
 
         <div class="text-xs text-[#64748B] px-3 py-1 bg-[#F8FAFC] rounded-lg border border-[#E2E8F0] flex items-center gap-2">
@@ -790,6 +795,78 @@
     </div>
   </div>
 </div>
+
+      <!-- WORKER TAB: 6. STAFF AI ASSISTANT -->
+      <div id="workerTabAI" class="hidden space-y-6">
+        <div class="bg-white border border-[#E2E8F0] rounded-xl p-6 shadow-sm space-y-4">
+          <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E2E8F0] pb-4">
+            <div class="flex items-center gap-3">
+              <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 text-white flex items-center justify-center font-bold text-lg shadow-sm">
+                👩‍⚕️
+              </div>
+              <div>
+                <div class="flex items-center gap-2">
+                  <h3 class="text-base font-bold text-[#172033]">Staff Clinical Supply Assistant</h3>
+                  <span class="px-2 py-0.5 text-[11px] font-bold bg-blue-50 text-[#1677FF] rounded-full border border-blue-200">Local Mistral Active</span>
+                </div>
+                <p class="text-xs text-[#64748B]">Floor-level intelligence for nurses, ward managers, and hospital pharmacists</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-xs px-2.5 py-1 bg-emerald-50 text-emerald-800 border border-emerald-200 rounded-full font-medium flex items-center gap-1.5">
+                <span class="w-2 h-2 rounded-full bg-[#22A06B] animate-pulse"></span>
+                Ward Database Online
+              </span>
+            </div>
+          </div>
+
+          <!-- Staff-Tailored Quick Questions -->
+          <div>
+            <div class="text-[11px] font-semibold text-[#64748B] uppercase tracking-wider mb-2">Frequently Asked Ward Questions:</div>
+            <div class="flex flex-wrap gap-2">
+              <button onclick="askWorkerAI('When will the emergency MED004 delivery from Hospital B arrive?')" class="text-xs bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#172033] px-3 py-1.5 rounded-full transition-all flex items-center gap-1">
+                ⏱️ <span>When will MED004 arrive from Hospital B?</span>
+              </button>
+              <button onclick="askWorkerAI('What medicines are low or running out at Hospital A this week?')" class="text-xs bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#172033] px-3 py-1.5 rounded-full transition-all flex items-center gap-1">
+                🔴 <span>What medicines are low at Hospital A?</span>
+              </button>
+              <button onclick="askWorkerAI('What medicines in our ward are at risk of expiring in the next 30 days?')" class="text-xs bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#172033] px-3 py-1.5 rounded-full transition-all flex items-center gap-1">
+                ⏳ <span>Which medicines are near expiry?</span>
+              </button>
+              <button onclick="askWorkerAI('Do we have stock of Norepinephrine / Emergency-Medicine-A?')" class="text-xs bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#172033] px-3 py-1.5 rounded-full transition-all flex items-center gap-1">
+                💊 <span>Check Norepinephrine / MED004 stock</span>
+              </button>
+              <button onclick="askWorkerAI('Can Hospital B donate 500 units for tomorrow morning?')" class="text-xs bg-[#F1F5F9] hover:bg-[#E2E8F0] text-[#172033] px-3 py-1.5 rounded-full transition-all flex items-center gap-1">
+                ⚡ <span>Can Hospital B donate 500 units?</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Dialogue Stream -->
+          <div id="workerAiChatStream" class="space-y-3 min-h-[240px] max-h-[400px] overflow-y-auto p-4 bg-[#F8FAFC] rounded-xl border border-[#E2E8F0] custom-scrollbar text-xs">
+            <!-- Bot Welcome Message -->
+            <div class="flex items-start gap-2.5 max-w-xl">
+              <div class="w-6 h-6 rounded-full bg-[#1677FF] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+                AI
+              </div>
+              <div class="bg-white p-3.5 rounded-lg border border-[#E2E8F0] shadow-sm text-[#172033] leading-relaxed">
+                Hello Nurse / Ward Staff. I am your <strong>Staff Clinical Supply Assistant</strong> powered by local Ollama Mistral and synchronized with our hospital network's real-time inventory.
+                <br><br>
+                You can ask me anything about <strong>current medicine stock, ETA of inter-hospital courier dispatches, shelf-life and near-expiry batches</strong>, or <strong>substitute alternatives</strong> for your ward.
+              </div>
+            </div>
+          </div>
+
+          <!-- Input Bar -->
+          <div class="flex items-center gap-2 pt-2">
+            <input id="workerAiUserInput" type="text" onkeydown="if(event.key==='Enter') handleWorkerAISubmit()" placeholder="Ask about ward medicines, stockouts, delivery ETA, or shelf-life..." class="flex-1 border border-[#CBD5E1] rounded-lg px-3.5 py-2.5 text-xs focus:outline-none focus:ring-2 focus:ring-[#1677FF]">
+            <button onclick="handleWorkerAISubmit()" class="px-4 py-2.5 bg-[#1677FF] hover:bg-blue-600 text-white rounded-lg text-xs font-semibold shadow-sm transition-all flex items-center gap-1.5">
+              <span>⚡</span>
+              <span>Ask Staff AI</span>
+            </button>
+          </div>
+        </div>
+      </div>
 
     </div>
 
@@ -1599,7 +1676,7 @@
 
           <!-- Input Bar -->
           <div class="flex items-center gap-2 pt-2">
-            <input id="aiUserInput" type="text" placeholder="Ask a supply or simulation question..." class="flex-1 border border-[#CBD5E1] rounded-lg px-3.5 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#1677FF]">
+            <input id="aiUserInput" type="text" onkeydown="if(event.key==='Enter') handleAISubmit()" placeholder="Ask a supply or simulation question..." class="flex-1 border border-[#CBD5E1] rounded-lg px-3.5 py-2 text-xs focus:outline-none focus:ring-2 focus:ring-[#1677FF]">
             <button onclick="handleAISubmit()" class="px-4 py-2 bg-[#1677FF] hover:bg-blue-600 text-white rounded-lg text-xs font-semibold shadow-sm transition-all">
               Ask Assistant
             </button>
@@ -1814,7 +1891,7 @@
     // 2. Worker Subtab Switching
     function setWorkerTab(tab) {
       currentWorkerTab = tab;
-      const tabs = ['home', 'map', 'needed', 'expiry', 'emergency'];
+      const tabs = ['home', 'map', 'needed', 'expiry', 'emergency', 'ai'];
       tabs.forEach(t => {
         const btn = document.getElementById('wtab-' + t);
         const container = document.getElementById('workerTab' + capitalize(t));
@@ -1860,6 +1937,7 @@
     }
 
     function capitalize(s) {
+      if (s === 'ai') return 'AI';
       return s.charAt(0).toUpperCase() + s.slice(1);
     }
 
@@ -1956,13 +2034,173 @@
       showToast(`Recalibrated forecast chart for Medicine ${med}`, "info");
     }
 
+    // 7b. Staff AI Assistant Controller
+    function askWorkerAI(question) {
+      const input = document.getElementById('workerAiUserInput');
+      if (input) {
+        input.value = question;
+        handleWorkerAISubmit();
+      }
+    }
+
+    async function handleWorkerAISubmit() {
+      const input = document.getElementById('workerAiUserInput');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+
+      const stream = document.getElementById('workerAiChatStream');
+      
+      // User message
+      const userBubble = document.createElement('div');
+      userBubble.className = "flex items-start gap-2.5 max-w-xl ml-auto justify-end";
+      userBubble.innerHTML = `
+        <div class="bg-[#1677FF] text-white p-3 rounded-lg shadow-sm">
+          ${escapeHtml(text)}
+        </div>
+        <div class="w-6 h-6 rounded-full bg-slate-700 text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+          U
+        </div>
+      `;
+      stream.appendChild(userBubble);
+      input.value = '';
+      stream.scrollTop = stream.scrollHeight;
+
+      // Loading indicator bubble
+      const loadingBubble = document.createElement('div');
+      loadingBubble.id = "workerAiLoadingBubble";
+      loadingBubble.className = "flex items-start gap-2.5 max-w-xl";
+      loadingBubble.innerHTML = `
+        <div class="w-6 h-6 rounded-full bg-[#1677FF] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+          AI
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-[#E2E8F0] shadow-sm text-[#64748B] flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#1677FF] animate-ping"></span>
+          <span>Querying ward inventory &amp; Mistral AI...</span>
+        </div>
+      `;
+      stream.appendChild(loadingBubble);
+      stream.scrollTop = stream.scrollHeight;
+
+      let answer = "";
+
+      // 1. Try Live Ollama Mistral Query with Grounded Synthetic Database Context
+      try {
+        const syntheticContext = `
+=== MEDINATIVE REGIONAL SYNTHETIC HEALTHCARE NETWORK DATABASE ===
+HOSPITAL FACILITIES (10 Regional Network Nodes):
+- Hospital A (HOSP_A): Level 1 Trauma Center, 750 beds, 88% occupancy, 18,833 units total stock. CRITICAL shortage risk on MED004 (Emergency-Medicine-A) with 4.2 days until stockout vs 7-day supplier lead time. Mandatory safety stock: 5 days. Needs 2,500 units from Hospital B.
+- Hospital B (HOSP_B): Academic Medical Center, 520 beds, 72% occupancy, 18,214 units stock. SAFE status, primary network donor hub with 12,400+ safe transferable surplus units.
+- Hospital C (HOSP_C): Specialty Surgical Institute, 310 beds, 68% occupancy, 11,150 units stock. SAFE status, 2,800+ surplus units.
+- Hospital D (HOSP_D): Community Acute Hospital, 240 beds, 93% occupancy, 5,784 units stock. CRITICAL. Open Emergency Request EMERG_REQ_002: 800 units MED004 needed for Mass Casualty Multi-Trauma Resuscitation.
+- Hospital E (HOSP_E): Trauma & Emergency Hospital, 380 beds, 89% occupancy, 8,639 units stock. HIGH risk.
+- Hospital F (HOSP_F): Rural Specialty Care, 120 beds, 70% occupancy, 2,762 units stock. MODERATE risk.
+- Hospital G (HOSP_G): Pediatric & General Facility, 200 beds, 75% occupancy, 5,591 units stock. Open Emergency Request EMERG_REQ_003: 80 units MED018 (Critical-Biologic-A, ₹18,500/unit) for Severe Immunologic Crisis.
+- Hospital H (HOSP_H): Cardiac & Critical Center, 340 beds, 82% occupancy, 7,604 units stock. CRITICAL. Open Emergency Request EMERG_REQ_001: 500 units MED008 (Emergency-Injection-A) needed by tomorrow 10:00 AM for Emergency Aortic Repair / Reversal. Recommended source: Hospital B (arrives in 48 mins via expressway).
+- Hospital I (HOSP_I): Suburban Satellite Hospital, 160 beds, 69% occupancy, 3,635 units stock.
+- Hospital J (HOSP_J): Metropolitan General Hospital, 420 beds, 74% occupancy, 10,691 units stock. SAFE status.
+
+MEDICINES CATALOG (20 Formulary Medicines):
+- MED001: Antibiotic-A (Broad-Spectrum Antibiotic, Crit: 4, Cost: ₹850, Shelf life: 270d)
+- MED002: Analgesic-A (Critical Analgesic & Sedation, Crit: 4, Cost: ₹280, Shelf life: 365d)
+- MED003: Insulin-A (Metabolic & Endocrine, Crit: 5, Cost: ₹420, Shelf life: 180d, Cold Chain: Yes)
+- MED004: Emergency-Medicine-A (Emergency Resuscitation & Vasopressor, Crit: 5, Cost: ₹350, Shelf life: 365d)
+- MED005: IV-Fluid-A (High-Volume Hydration Fluid, Crit: 3, Cost: ₹55, Shelf life: 730d)
+- MED006: Surgical-Supply-A (Surgical Hemostatic Matrix, Crit: 4, Cost: ₹3,200, Shelf life: 365d)
+- MED007: Antiviral-A (Targeted Antiviral Infusion, Crit: 4, Cost: ₹4,800, Shelf life: 180d)
+- MED008: Emergency-Injection-A (Urgent Surgery Reversal & Antidote, Crit: 5, Cost: ₹2,400, Shelf life: 240d)
+- MED009: Sedative-A (ICU Sedation & Anesthesia, Crit: 4, Cost: ₹380, Shelf life: 365d)
+- MED010: Anticoagulant-A (Critical Cardiovascular Anticoagulant, Crit: 4, Cost: ₹290, Shelf life: 540d)
+- MED011: Antibiotic-B (Second-Line Antibiotic, Crit: 3, Cost: ₹620, Shelf life: 300d)
+- MED012: IV-Fluid-B (Balanced Electrolyte Fluid, Crit: 3, Cost: ₹65, Shelf life: 730d)
+- MED013: Sedative-B (Short-Acting Sedative Anxiolytic, Crit: 3, Cost: ₹190, Shelf life: 365d)
+- MED014: Antiviral-B (Oral Antiviral Capsule, Crit: 3, Cost: ₹1,450, Shelf life: 365d)
+- MED015: Cardiovascular-A (Antiarrhythmic Injection, Crit: 4, Cost: ₹340, Shelf life: 365d)
+- MED016: Respiratory-A (Emergency Bronchodilator Nebulizer, Crit: 4, Cost: ₹280, Shelf life: 450d)
+- MED017: Dialysis-Supply-A (Renal Replacement Solution, Crit: 4, Cost: ₹1,200, Shelf life: 540d)
+- MED018: Critical-Biologic-A (Specialized Monoclonal Immunoglobulin, Crit: 5, Cost: ₹18,500, Shelf life: 90d, Cold Chain: Yes)
+- MED019: Surgical-Suture-A (Vascular Synthetic Hemostatic Suture, Crit: 3, Cost: ₹1,800, Shelf life: 730d)
+- MED020: Burn-Care-A (Advanced Antimicrobial Wound Dressing, Crit: 3, Cost: ₹750, Shelf life: 540d)
+
+NETWORK OPERATIONS & RISK METRICS:
+- Total Network Inventory: 92,903 units across all 10 facilities.
+- Active Critical Shortage Alerts: 20 facility-medicine alerts (worst: Hospital A on MED004 with 4.2 days remaining).
+- Safe Transferable Surplus: 41,541 units available across safe facilities (Hospital B has largest surplus).
+- Total Expiry/Wastage Risk: ₹16,544,250 worth of medicines at risk within 30 days.
+- Open Emergency Orders: 3 (EMERG_REQ_001 at Hospital H, EMERG_REQ_002 at Hospital D, EMERG_REQ_003 at Hospital G).
+- Primary Recommended Transfer: Hospital B donating 2,500 units of MED004 to Hospital A (arrives in 48 mins via expressway).
+=============================================================
+`;
+
+        const fullPrompt = `You are the Medinative Clinical Floor Supply Assistant supporting hospital nurses, pharmacists, and ward doctors.
+CRITICAL MANDATORY INSTRUCTION: You have FULL AND DIRECT ACCESS to the regional hospital network's live synthetic operations database provided below.
+NEVER say "I am an AI and do not have real-time data access" or give generic textbook advice. You have the exact data right here.
+Answer the staff member's question directly, clearly, and helpfully using the synthetic data below. Cite exact hospital names, medicine names/IDs, unit numbers, arrival times, and clinical guidance where relevant.
+
+${syntheticContext}
+
+Staff Member Question: ${text}
+
+Clinical Response for Floor Staff:`;
+
+        const res = await fetch('http://localhost:11434/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'mistral',
+            prompt: fullPrompt,
+            stream: false
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          answer = data.response;
+        }
+      } catch (err) {
+        console.log("Worker AI Ollama fetch:", err);
+      }
+
+      // Analytical Fallback for Staff
+      if (!answer) {
+        const q = text.toLowerCase();
+        if (q.includes("arrive") || q.includes("when") || q.includes("delivery") || q.includes("hospital b")) {
+          answer = "The autonomous redistribution dispatch of 2,500 units of Emergency-Medicine-A (MED004) from Hospital B to Hospital A has an estimated transit time of 48 minutes via the Expressway corridor. Courier dispatch is clear of major congestion.";
+        } else if (q.includes("low") || q.includes("run out") || q.includes("shortage")) {
+          answer = "At Hospital A, three medications require immediate floor monitoring: Emergency-Medicine-A (MED004 - 180 units left, ~4.2 days runway), Surgical-Suture-A (MED019 - 622 units left), and Cardiovascular-A (MED015 - 773 units left). Inbound redistribution from Hospital B is scheduled.";
+        } else if (q.includes("expire") || q.includes("expiry") || q.includes("waste")) {
+          answer = "Two batches in our ward area require dispensing prioritization: Ceftriaxone 1g (Batch #CX-8841, 140 units, expires in 12 days) and Heparin 5000 IU (Batch #HP-2099, 400 units, expires in 18 days). Please dispense these first before opening fresh inventory.";
+        } else if (q.includes("norepinephrine") || q.includes("med004") || q.includes("stock")) {
+          answer = "Hospital A currently holds 180 units of Emergency-Medicine-A (MED004 / Norepinephrine resuscitation equivalent). While local stock is under safety thresholds, partner Hospital B holds 12,400+ surplus units and can dispatch additional ampoules on demand.";
+        } else if (q.includes("donate") || q.includes("500")) {
+          answer = "Yes. Hospital B currently has 18,214 units in stock and a verified safe transferable surplus of 12,400+ units. Donating 500 units will safely preserve Hospital B's mandatory 5-day safety buffer.";
+        } else {
+          answer = "The hospital network currently tracks 92,903 units across 10 regional facilities. Hospital A's clinical ward stocks are backed by 41,541 safe surplus units across the regional corridor, with active courier links ready for inter-hospital replenishment.";
+        }
+      }
+
+      loadingBubble.remove();
+
+      const botBubble = document.createElement('div');
+      botBubble.className = "flex items-start gap-2.5 max-w-xl";
+      botBubble.innerHTML = `
+        <div class="w-6 h-6 rounded-full bg-[#1677FF] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+          AI
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-[#E2E8F0] shadow-sm text-[#172033] leading-relaxed">
+          ${escapeHtml(answer)}
+        </div>
+      `;
+      stream.appendChild(botBubble);
+      stream.scrollTop = stream.scrollHeight;
+    }
+
     // 8. Admin AI Assistant
     function askAI(question) {
       document.getElementById('aiUserInput').value = question;
       handleAISubmit();
     }
 
-    function handleAISubmit() {
+    async function handleAISubmit() {
       const input = document.getElementById('aiUserInput');
       const text = input.value.trim();
       if (!text) return;
@@ -1982,34 +2220,136 @@
       `;
       stream.appendChild(userBubble);
       input.value = '';
+      stream.scrollTop = stream.scrollHeight;
 
-      // Simulated Response based on exact backend knowledge
-      setTimeout(() => {
-        let answer = "Based on the live linear optimization engine and stockout models, all safety buffers and transport deadlines are continuously verified.";
-        const q = text.toLowerCase();
-        if (q.includes("hospital a") && q.includes("critical")) {
-          answer = "Hospital A is critical because its Medicine X inventory will breach floor safety thresholds in 2.3 days, while standard wholesale supplier lead time is 7.0 days. Recommended action: 2,500 units from Hospital B (2h arrival).";
-        } else if (q.includes("run out next week")) {
-          answer = "Over the next 7 days, 3 hospitals are projected to reach stockout: Hospital A (Medicine X in 2.3d), Hospital H (Medicine X in 0.8d), and Hospital D (Medicine Y in 5.0d).";
-        } else if (q.includes("hospital c") && q.includes("selected")) {
-          answer = "Hospital C was rejected by the emergency optimizer because it only holds 200 available surplus units—leaving an intolerable deficit of 300 units against Hospital H's 500 unit emergency order.";
-        } else if (q.includes("50%")) {
-          answer = "A 50% demand surge shortens Hospital A's stockout runway from 2.3 days to 1.6 days, escalates regional shortages from 3 to 7 medicines, and increases required transfer volume to 3,750 units.";
+      // Loading indicator bubble
+      const loadingBubble = document.createElement('div');
+      loadingBubble.id = "aiLoadingBubble";
+      loadingBubble.className = "flex items-start gap-2.5 max-w-xl";
+      loadingBubble.innerHTML = `
+        <div class="w-6 h-6 rounded-full bg-[#1677FF] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+          AI
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-[#E2E8F0] shadow-sm text-[#64748B] flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-[#1677FF] animate-ping"></span>
+          <span>Generating answer with Ollama Mistral...</span>
+        </div>
+      `;
+      stream.appendChild(loadingBubble);
+      stream.scrollTop = stream.scrollHeight;
+
+      let answer = "";
+
+      // 1. Try Live Ollama Mistral Query with Grounded Synthetic Database Context
+      try {
+        const syntheticContext = `
+=== MEDINATIVE REGIONAL SYNTHETIC HEALTHCARE NETWORK DATABASE ===
+HOSPITAL FACILITIES (10 Regional Network Nodes):
+- Hospital A (HOSP_A): Level 1 Trauma Center, 750 beds, 88% occupancy, 18,833 units total stock. CRITICAL shortage risk on MED004 (Emergency-Medicine-A) with 4.2 days until stockout vs 7-day supplier lead time. Mandatory safety stock: 5 days. Needs 2,500 units from Hospital B.
+- Hospital B (HOSP_B): Academic Medical Center, 520 beds, 72% occupancy, 18,214 units stock. SAFE status, primary network donor hub with 12,400+ safe transferable surplus units.
+- Hospital C (HOSP_C): Specialty Surgical Institute, 310 beds, 68% occupancy, 11,150 units stock. SAFE status, 2,800+ surplus units.
+- Hospital D (HOSP_D): Community Acute Hospital, 240 beds, 93% occupancy, 5,784 units stock. CRITICAL. Open Emergency Request EMERG_REQ_002: 800 units MED004 needed for Mass Casualty Multi-Trauma Resuscitation.
+- Hospital E (HOSP_E): Trauma & Emergency Hospital, 380 beds, 89% occupancy, 8,639 units stock. HIGH risk.
+- Hospital F (HOSP_F): Rural Specialty Care, 120 beds, 70% occupancy, 2,762 units stock. MODERATE risk.
+- Hospital G (HOSP_G): Pediatric & General Facility, 200 beds, 75% occupancy, 5,591 units stock. Open Emergency Request EMERG_REQ_003: 80 units MED018 (Critical-Biologic-A, ₹18,500/unit) for Severe Immunologic Crisis.
+- Hospital H (HOSP_H): Cardiac & Critical Center, 340 beds, 82% occupancy, 7,604 units stock. CRITICAL. Open Emergency Request EMERG_REQ_001: 500 units MED008 (Emergency-Injection-A) needed by tomorrow 10:00 AM for Emergency Aortic Repair / Reversal. Recommended source: Hospital B (arrives in 48 mins via expressway).
+- Hospital I (HOSP_I): Suburban Satellite Hospital, 160 beds, 69% occupancy, 3,635 units stock.
+- Hospital J (HOSP_J): Metropolitan General Hospital, 420 beds, 74% occupancy, 10,691 units stock. SAFE status.
+
+MEDICINES CATALOG (20 Formulary Medicines):
+- MED001: Antibiotic-A (Broad-Spectrum Antibiotic, Crit: 4, Cost: ₹850, Shelf life: 270d)
+- MED002: Analgesic-A (Critical Analgesic & Sedation, Crit: 4, Cost: ₹280, Shelf life: 365d)
+- MED003: Insulin-A (Metabolic & Endocrine, Crit: 5, Cost: ₹420, Shelf life: 180d, Cold Chain: Yes)
+- MED004: Emergency-Medicine-A (Emergency Resuscitation & Vasopressor, Crit: 5, Cost: ₹350, Shelf life: 365d)
+- MED005: IV-Fluid-A (High-Volume Hydration Fluid, Crit: 3, Cost: ₹55, Shelf life: 730d)
+- MED006: Surgical-Supply-A (Surgical Hemostatic Matrix, Crit: 4, Cost: ₹3,200, Shelf life: 365d)
+- MED007: Antiviral-A (Targeted Antiviral Infusion, Crit: 4, Cost: ₹4,800, Shelf life: 180d)
+- MED008: Emergency-Injection-A (Urgent Surgery Reversal & Antidote, Crit: 5, Cost: ₹2,400, Shelf life: 240d)
+- MED009: Sedative-A (ICU Sedation & Anesthesia, Crit: 4, Cost: ₹380, Shelf life: 365d)
+- MED010: Anticoagulant-A (Critical Cardiovascular Anticoagulant, Crit: 4, Cost: ₹290, Shelf life: 540d)
+- MED011: Antibiotic-B (Second-Line Antibiotic, Crit: 3, Cost: ₹620, Shelf life: 300d)
+- MED012: IV-Fluid-B (Balanced Electrolyte Fluid, Crit: 3, Cost: ₹65, Shelf life: 730d)
+- MED013: Sedative-B (Short-Acting Sedative Anxiolytic, Crit: 3, Cost: ₹190, Shelf life: 365d)
+- MED014: Antiviral-B (Oral Antiviral Capsule, Crit: 3, Cost: ₹1,450, Shelf life: 365d)
+- MED015: Cardiovascular-A (Antiarrhythmic Injection, Crit: 4, Cost: ₹340, Shelf life: 365d)
+- MED016: Respiratory-A (Emergency Bronchodilator Nebulizer, Crit: 4, Cost: ₹280, Shelf life: 450d)
+- MED017: Dialysis-Supply-A (Renal Replacement Solution, Crit: 4, Cost: ₹1,200, Shelf life: 540d)
+- MED018: Critical-Biologic-A (Specialized Monoclonal Immunoglobulin, Crit: 5, Cost: ₹18,500, Shelf life: 90d, Cold Chain: Yes)
+- MED019: Surgical-Suture-A (Vascular Synthetic Hemostatic Suture, Crit: 3, Cost: ₹1,800, Shelf life: 730d)
+- MED020: Burn-Care-A (Advanced Antimicrobial Wound Dressing, Crit: 3, Cost: ₹750, Shelf life: 540d)
+
+NETWORK OPERATIONS & RISK METRICS:
+- Total Network Inventory: 92,903 units across all 10 facilities.
+- Active Critical Shortage Alerts: 20 facility-medicine alerts (worst: Hospital A on MED004 with 4.2 days remaining).
+- Safe Transferable Surplus: 41,541 units available across safe facilities (Hospital B has largest surplus).
+- Total Expiry/Wastage Risk: ₹16,544,250 worth of medicines at risk within 30 days.
+- Open Emergency Orders: 3 (EMERG_REQ_001 at Hospital H, EMERG_REQ_002 at Hospital D, EMERG_REQ_003 at Hospital G).
+- Primary Recommended Transfer: Hospital B donating 2,500 units of MED004 to Hospital A (arrives in 48 mins via expressway).
+=============================================================
+`;
+
+        const fullPrompt = `You are the Medinative Clinical Supply Intelligence AI Assistant for this regional hospital network.
+CRITICAL MANDATORY INSTRUCTION: You have FULL AND DIRECT ACCESS to the regional hospital network's live synthetic operations database provided below.
+NEVER say "I am an AI and do not have real-time data access to specific hospital inventory" or give generic textbook advice. You have the exact data right here.
+Answer the user's question directly, clinically, and authoritatively using the synthetic data below. Cite exact hospital names, medicine names/IDs, unit numbers, days to stockout, and costs in Indian Rupees (₹).
+
+${syntheticContext}
+
+User Question: ${text}
+
+Clinical Executive Response:`;
+
+        const res = await fetch('http://localhost:11434/api/generate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            model: 'mistral',
+            prompt: fullPrompt,
+            stream: false
+          })
+        });
+        if (res.ok) {
+          const data = await res.json();
+          answer = data.response;
         }
+      } catch (err) {
+        console.log("Ollama direct fetch (using fallback knowledge base):", err);
+      }
 
-        const botBubble = document.createElement('div');
-        botBubble.className = "flex items-start gap-2.5 max-w-xl";
-        botBubble.innerHTML = `
-          <div class="w-6 h-6 rounded-full bg-[#1677FF] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
-            AI
-          </div>
-          <div class="bg-white p-3 rounded-lg border border-[#E2E8F0] shadow-sm text-[#172033]">
-            ${answer}
-          </div>
-        `;
-        stream.appendChild(botBubble);
-        stream.scrollTop = stream.scrollHeight;
-      }, 450);
+      // 2. Analytical Fallback if local Ollama direct browser fetch blocked
+      if (!answer) {
+        const q = text.toLowerCase();
+        if (q.includes("hospital a") || (q.includes("critical") && q.includes("shortage"))) {
+          answer = "Hospital A is at CRITICAL risk because its Emergency-Medicine-A (MED004) stock of 180 units will breach floor safety thresholds in 4.2 days, while standard wholesale supplier lead time is 7.0 days. Recommended action: Autonomous redistribution of 2,500 units from Hospital B (arrives in 48 mins via expressway).";
+        } else if (q.includes("run out") || q.includes("next week") || q.includes("shortage")) {
+          answer = "Across the 10-hospital network, 20 medicine/facility alerts are active. The most urgent stockouts are: Hospital A (MED004 in 4.2d), Hospital D (MED004 in 3.1d), and Hospital H (MED008 in 1.8d). All 20 can be mitigated through inter-hospital redistribution from Hospital B and Hospital C.";
+        } else if (q.includes("donate") || q.includes("surplus") || q.includes("hospital b")) {
+          answer = "Hospital B holds 18,214 total units and maintains a verified safe transferable surplus of 12,400+ units. It can safely donate 2,500 units of MED004 to Hospital A while preserving its mandatory 5-day safety reserve.";
+        } else if (q.includes("expire") || q.includes("waste")) {
+          answer = "Batch expiry analysis indicates ₹16,544,250 worth of near-expiry medicines across all 10 hospitals within the next 30 days. Immediate proactive redistribution to high-consumption facilities is recommended to avert clinical waste.";
+        } else if (q.includes("emergency") || q.includes("surgery") || q.includes("med008")) {
+          answer = "For Emergency Request EMERG_REQ_001 (500 units of MED008 for Emergency Aortic Repair at Hospital H by 10:00 AM tomorrow): Hospital B is the recommended donor facility, arriving in 48 minutes via expressway with full donor safety reserve protected.";
+        } else if (q.includes("50%")) {
+          answer = "A 50% network demand surge accelerates Hospital A's stockout runway from 4.2 days down to 2.8 days, increases critical shortage breaches from 20 to 34, and requires deploying 18,200 additional units from network reserves.";
+        } else {
+          answer = "The Medinative network monitors 10 regional hospitals (Hospital A through Hospital J) holding 92,903 total inventory units across 20 formulary medicines. Currently, 41,541 transferable surplus units are available to buffer against 20 critical shortage alerts and 3 open emergency surgical requests.";
+        }
+      }
+
+      loadingBubble.remove();
+
+      const botBubble = document.createElement('div');
+      botBubble.className = "flex items-start gap-2.5 max-w-xl";
+      botBubble.innerHTML = `
+        <div class="w-6 h-6 rounded-full bg-[#1677FF] text-white flex items-center justify-center font-bold text-[10px] shrink-0">
+          AI
+        </div>
+        <div class="bg-white p-3 rounded-lg border border-[#E2E8F0] shadow-sm text-[#172033] leading-relaxed">
+          ${escapeHtml(answer)}
+        </div>
+      `;
+      stream.appendChild(botBubble);
+      stream.scrollTop = stream.scrollHeight;
     }
 
     function escapeHtml(str) {

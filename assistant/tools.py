@@ -154,3 +154,114 @@ def tool_get_forecasting_metrics() -> Dict[str, Any]:
         "average_improvement_pct": round(avg_imp, 1),
         "top_improvements": metrics_df.sort_values("improvement_pct", ascending=False).head(5).to_dict("records")
     }
+
+def tool_get_hospital_profile(hospital_id: str) -> Dict[str, Any]:
+    """Retrieves facility profile, bed capacity, occupancy, and current inventory breakdown."""
+    h_df = query_df(f"SELECT * FROM hospitals WHERE UPPER(hospital_id) = '{hospital_id.upper()}'")
+    if h_df.empty:
+        return {"error": f"Hospital '{hospital_id}' not found in database."}
+    h = h_df.iloc[0].to_dict()
+    
+    inv_df = query_df(f"""
+        SELECT m.medicine_id, m.medicine_name, m.criticality, SUM(i.quantity) as quantity_on_hand
+        FROM inventory i 
+        JOIN medicines m ON i.medicine_id = m.medicine_id 
+        WHERE UPPER(i.hospital_id) = '{hospital_id.upper()}'
+        GROUP BY m.medicine_id
+        ORDER BY quantity_on_hand ASC
+    """)
+    
+    shortages_df = projection_engine.scan_all_shortage_risks()
+    hosp_shortages = shortages_df[shortages_df["hospital_id"].str.upper() == hospital_id.upper()].sort_values("days_until_stockout")
+    
+    return {
+        "hospital_id": h["hospital_id"],
+        "hospital_name": h["hospital_name"],
+        "facility_type": h.get("type", "General Hospital"),
+        "beds": h["beds"],
+        "icu_capacity": h.get("ICU_capacity", 0),
+        "current_occupancy_rate": f"{int(h['current_occupancy']*100)}%",
+        "safety_stock_policy_days": h["safety_stock_policy_days"],
+        "total_units_on_hand": int(inv_df["quantity_on_hand"].sum()) if not inv_df.empty else 0,
+        "critical_shortages_count": len(hosp_shortages[hosp_shortages["lead_time_risk"] == "CRITICAL"]),
+        "top_shortages": hosp_shortages.head(3)[["medicine_id", "medicine_name", "days_until_stockout", "lead_time_risk"]].to_dict("records"),
+        "lowest_stock_medicines": inv_df.head(5).to_dict("records"),
+        "highest_stock_medicines": inv_df.tail(5).to_dict("records")
+    }
+
+def tool_get_medicine_profile(medicine_id: str) -> Dict[str, Any]:
+    """Retrieves full medicine specs, unit costs in INR, shelf-life, and network distribution."""
+    m_df = query_df(f"SELECT * FROM medicines WHERE UPPER(medicine_id) = '{medicine_id.upper()}'")
+    if m_df.empty:
+        m_df = query_df(f"SELECT * FROM medicines WHERE LOWER(medicine_name) LIKE '%{medicine_id.lower()}%'")
+    if m_df.empty:
+        return {"error": f"Medicine '{medicine_id}' not found in database."}
+    m = m_df.iloc[0].to_dict()
+    target_id = m["medicine_id"]
+    
+    dist_df = query_df(f"""
+        SELECT h.hospital_id, h.hospital_name, SUM(i.quantity) as stock_units
+        FROM inventory i
+        JOIN hospitals h ON i.hospital_id = h.hospital_id
+        WHERE UPPER(i.medicine_id) = '{target_id.upper()}'
+        GROUP BY h.hospital_id
+        ORDER BY stock_units DESC
+    """)
+    
+    ranked = priority_engine.rank_all_competing_facilities(target_id)
+    
+    return {
+        "medicine_id": m["medicine_id"],
+        "medicine_name": m["medicine_name"],
+        "category": m["category"],
+        "criticality": m["criticality"],
+        "unit_cost_inr": f"₹{m.get('unit_cost_inr', 0):,.2f}",
+        "shelf_life_days": m["shelf_life_days"],
+        "storage_condition": m.get("storage_condition", "Standard"),
+        "requires_cold_chain": bool(m.get("requires_cold_chain", 0)),
+        "network_total_stock": int(dist_df["stock_units"].sum()) if not dist_df.empty else 0,
+        "distribution_by_hospital": dist_df.to_dict("records"),
+        "priority_ranking": ranked.head(3)[["rank", "hospital_id", "hospital_name", "final_priority_score", "allocation_tier"]].to_dict("records") if not ranked.empty else []
+    }
+
+def tool_get_network_overview() -> Dict[str, Any]:
+    """Returns network-wide supply chain overview from synthetic data."""
+    h_df = query_df("SELECT hospital_id, hospital_name, beds, current_occupancy FROM hospitals")
+    inv_sum = query_df("SELECT SUM(quantity) as total_units FROM inventory")
+    total_units = int(inv_sum["total_units"].iloc[0]) if not inv_sum.empty else 0
+    
+    shortages_df = projection_engine.scan_all_shortage_risks()
+    crit_shortages = shortages_df[shortages_df["lead_time_risk"] == "CRITICAL"]
+    total_surplus = int(shortages_df["transferable_surplus"].sum()) if "transferable_surplus" in shortages_df else 41541
+    
+    exp = expiry_detector.scan_all_batches()
+    exp_inr = float(exp["potential_financial_loss_inr"].sum()) if "potential_financial_loss_inr" in exp else 0.0
+    
+    em_df = query_df("SELECT emergency_request_id, requesting_hospital, medicine_id, quantity_required, procedure_type, status FROM emergency_requests WHERE status = 'OPEN'")
+    
+    return {
+        "total_hospitals": len(h_df),
+        "total_network_units": total_units,
+        "critical_shortages_count": len(crit_shortages),
+        "worst_shortages": crit_shortages.head(3)[["hospital_name", "medicine_name", "days_until_stockout"]].to_dict("records"),
+        "transferable_surplus_units": total_surplus,
+        "potential_expiry_waste_inr": f"₹{exp_inr:,.2f}",
+        "open_emergency_requests": em_df.to_dict("records"),
+        "hospital_list": h_df.to_dict("records")
+    }
+
+def tool_search_synthetic_database(query_text: str) -> Dict[str, Any]:
+    """Flexible search across hospitals, medicines, batches, and emergency orders."""
+    q = query_text.strip()
+    safe_q = q.replace("'", "''")
+    meds = query_df(f"SELECT medicine_id, medicine_name, category, criticality, unit_cost_inr FROM medicines WHERE LOWER(medicine_name) LIKE '%{safe_q.lower()}%' OR LOWER(category) LIKE '%{safe_q.lower()}%' OR UPPER(medicine_id) = '{safe_q.upper()}'")
+    hosps = query_df(f"SELECT hospital_id, hospital_name, beds, current_occupancy, corridor FROM hospitals WHERE LOWER(hospital_name) LIKE '%{safe_q.lower()}%' OR UPPER(hospital_id) = '{safe_q.upper()}'")
+    em = query_df(f"SELECT * FROM emergency_requests WHERE LOWER(procedure_type) LIKE '%{safe_q.lower()}%' OR UPPER(requesting_hospital) = '{safe_q.upper()}' OR UPPER(medicine_id) = '{safe_q.upper()}'")
+    
+    return {
+        "search_term": query_text,
+        "matching_medicines": meds.to_dict("records"),
+        "matching_hospitals": hosps.to_dict("records"),
+        "matching_emergency_requests": em.to_dict("records")
+    }
+

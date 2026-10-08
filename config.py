@@ -27,7 +27,7 @@ CURRENCY_CODE = "INR"
 TRANSPORT_COST_PER_KM_INR = 35.0  # Realistic ₹35/km for dedicated medical courier/ambulance transit
 
 # LLM Assistant Settings
-LLM_MODEL = os.getenv("LLM_MODEL", "llama3.2")
+LLM_MODEL = os.getenv("LLM_MODEL", "mistral")
 OLLAMA_BASE_URL = os.getenv("OLLAMA_BASE_URL", "http://localhost:11434")
 
 # Traffic Level Dynamics & Multipliers
